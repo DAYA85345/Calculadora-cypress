@@ -45,4 +45,14 @@ describe('Pruebas E2E de la Calculadora', () => {
     cy.get('#current-operand').should('have.text', '12');
   });
 
+  // 5. TRABAJO INDIVIDUAL: MULTIPLICACIÓN DE DOS DÍGITOS
+  it('Debe realizar la multiplicación de 5 * 5 correctamente', () => {
+    cy.contains('button', '5').click();
+    cy.contains('button', '×').click();
+    cy.contains('button', '5').click();
+    cy.contains('button', '=').click();
+
+    cy.get('#current-operand').should('have.text', '25');
+  });
+
 });
