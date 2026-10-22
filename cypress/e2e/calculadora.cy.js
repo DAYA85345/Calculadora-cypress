@@ -1,23 +1,48 @@
 describe('Pruebas E2E de la Calculadora', () => {
+
   beforeEach(() => {
-    // Abre la calculadora antes de cada prueba
     cy.visit('Calculadora.html');
   });
 
-  it('Debe realizar una suma correctamente (7 + 8 = 15)', () => {
-    // 1. Simula los clics en los botones
-    cy.contains('button', '7').click();
-    cy.contains('button', '+').click();
-    cy.contains('button', '8').click();
+  // 1. RESTA
+  it('Debe realizar una resta correctamente (9 - 4 = 5)', () => {
+    cy.contains('button', '9').click();
+    cy.contains('button', '-').click();
+    cy.contains('button', '4').click();
     cy.contains('button', '=').click();
 
-    // 2. Verifica que el <div id="current-operand"> contenga el valor 15
-    cy.get('#current-operand').should('have.text', '15');
+    cy.get('#current-operand').should('have.text', '5');
   });
 
-  it('Debe limpiar la pantalla con el botón AC', () => {
-    cy.contains('button', '9').click();
-    cy.contains('button', 'AC').click();
-    cy.get('#current-operand').should('have.text', '0');
+  // 2. MULTIPLICACIÓN
+  it('Debe realizar una multiplicación correctamente (6 * 7 = 42)', () => {
+    cy.contains('button', '6').click();
+    cy.contains('button', '×').click();
+    cy.contains('button', '7').click();
+    cy.contains('button', '=').click();
+
+    cy.get('#current-operand').should('have.text', '42');
   });
+
+  // 3. DIVISIÓN
+  it('Debe realizar una división correctamente (8 / 2 = 4)', () => {
+    cy.contains('button', '8').click();
+    cy.contains('button', '÷').click();
+    cy.contains('button', '2').click();
+    cy.contains('button', '=').click();
+
+    cy.get('#current-operand').should('have.text', '4');
+  });
+
+  // 4. BORRAR UN DÍGITO (DEL)
+  it('Debe borrar un solo dígito correctamente', () => {
+    cy.contains('button', '1').click();
+    cy.contains('button', '2').click();
+    cy.contains('button', '3').click();
+    
+    cy.contains('button', 'DEL').click();
+
+    cy.get('#current-operand').should('have.text', '12');
+  });
+
 });
